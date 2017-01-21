@@ -110,12 +110,16 @@ class UssdRequest(object):
             ussdRequest.name
     """
     def __init__(self, session_id, phone_number,
-                 ussd_input, language, **kwargs):
+                 ussd_input, language, default_language=None, **kwargs):
         """Represents a USSD request"""
 
         self.phone_number = phone_number
         self.input = unquote(ussd_input)
         self.language = language
+        if default_language:
+            self.default_language = default_language
+        else:
+            self.default_language = 'en'
         # if session id is less than 8 should provide the
         # suplimentary characters with 's'
         if len(str(session_id)) < 8:
