@@ -255,7 +255,7 @@ class UssdHandlerAbstract(object, metaclass=UssdHandlerMetaClass):
             language = self.ussd_request.language \
                    if self.ussd_request.language \
                           in text_context.keys() \
-                   else text_context['default']
+                   else self.ussd_request.default_language
 
             text_context = text_context[language]
 
