@@ -445,7 +445,7 @@ class UssdView(APIView):
             'initial_screen',
             namespace=self.customer_journey_namespace)
 
-        if isinstance(initial_screen, dict):
+        if isinstance(initial_screen, dict) and initial_screen.get('variables'):
             variable_conf = initial_screen['variables']
             file_path = variable_conf['file']
             namespace = variable_conf['namespace']
