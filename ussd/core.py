@@ -116,10 +116,7 @@ class UssdRequest(object):
         self.phone_number = phone_number
         self.input = unquote(ussd_input)
         self.language = language
-        if default_language:
-            self.default_language = default_language
-        else:
-            self.default_language = 'en'
+        self.default_language = default_language or 'en'
         # if session id is less than 8 should provide the
         # suplimentary characters with 's'
         if len(str(session_id)) < 8:
