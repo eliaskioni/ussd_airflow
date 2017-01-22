@@ -497,10 +497,10 @@ class UssdView(APIView):
             handler = staticconf.read(
                 'initial_screen', namespace=self.customer_journey_namespace)
             if isinstance(handler, dict):
-                handler = handler["screen"]
                 # set default language from namespace
                 if 'default_language' in handler:
                     ussd_request.default_language = handler.get('default_language', ussd_request.default_language)
+                handler = handler["screen"]
         ussd_response = (ussd_request, handler)
 
         # Handle any forwarded Requests; loop until a Response is
