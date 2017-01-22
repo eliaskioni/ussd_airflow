@@ -1,4 +1,6 @@
-initial_screen: enter_height
+initial_screen:
+  screen: enter_height
+  default_language: en
 
 enter_height:
   type: input_screen
