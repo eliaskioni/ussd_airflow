@@ -545,6 +545,8 @@ class UssdView(APIView):
             # all screens should have type attribute
             if screen_name == "initial_screen":
                 # confirm the next screen is in the screen content
+                if isinstance(screen_content, dict):
+                    screen_content = screen_content.get('screen')
                 if not screen_content in ussd_content.keys():
                     is_valid = False
                     errors.update(
