@@ -79,22 +79,11 @@ WSGI_APPLICATION = 'ussd_airflow.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-postgres = {
+DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+          default=os.environ.get('DATABASE_URL', 'sqlite:////{}UssdAirflow.sqlite3'.format(BASE_DIR))
     )
 }
-
-sqlite = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'UssdAirflowSchema',
-    }
-}
-
-# Default to sqlite database if DATABASE_URL is not provided.
-DATABASES = postgres if os.environ.get('DATABASE_URL') else sqlite
-# Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
