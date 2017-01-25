@@ -30,24 +30,15 @@ class TestUssdAppCreation(LiveServerTestCase):
             url(r'^ussd/', include('TestUssdApp.urls'))
         ]
 
-        print(len(urls.urlpatterns))
-
         urls.urlpatterns += ussd_url
-
-        from ussd_airflow import urls as ussd_airflow_urls
-        print(len(ussd_airflow_urls.urlpatterns))
 
         end_point_url = "http://localhost:8081/ussd/TestUssdApp_ussd_gateway"
         payload = {
             "phoneNumber": "0717199135", "sessionId": "12", "text": "1", "language": "en", "serviceCode": "200"}
-        headers = {
-            'content-type': "application/json",
-            'cache-control': "no-cache",
-        }
 
         response = self.client.post(end_point_url,
                                     data=json.dumps(payload),
-                                    content_type="application/json")
+                                    content_type="application/json",)
         self.assertEqual(response.content,
                          b'END Example Quit Screen. Delete this and define your own customer journey screens.')
         self.assertEqual(response.status_code, 200)
