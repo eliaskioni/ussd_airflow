@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'ussd_airflow.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-          default=os.environ.get('DATABASE_URL', 'sqlite:////{}UssdAirflow.sqlite3'.format(BASE_DIR))
+          default=os.environ.get('DATABASE_URL', 'sqlite:////{}/UssdAirflow'.format(BASE_DIR))
     )
 }
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
