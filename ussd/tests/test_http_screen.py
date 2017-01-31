@@ -108,6 +108,7 @@ class TestHttpScreen(UssdTestCase.BaseUssdTestCase):
             decoded_text = json.loads(response_content)
         except JSONDecodeError:
             decoded_text = response_content
+        self.assertEqual(type(decoded_text), str)
         response_ = HttpResponse(json.dumps({'data': 'Data'}))
         json.loads(response_.content.decode())
 
