@@ -1,7 +1,5 @@
 from json import JSONDecodeError
 
-import requests
-
 from ussd.tests import UssdTestCase
 from unittest import mock
 from django.http.response import JsonResponse as Response
