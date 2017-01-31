@@ -1,3 +1,7 @@
+from json import JSONDecodeError
+
+import requests
+
 from ussd.tests import UssdTestCase
 from unittest import mock
 from django.http.response import JsonResponse as Response
@@ -93,3 +97,21 @@ class TestHttpScreen(UssdTestCase.BaseUssdTestCase):
                         'session_id': ussd_client.session_id}
             )
         )
+
+    def test_json_decoding(self):
+        from django.http.response import HttpResponse
+        # expect this response to raise an error
+        response = HttpResponse('Plain text')
+        import json
+        with self.assertRaises(JSONDecodeError):
+            json.loads(response.content.decode())
+        response_content = response.content.decode()
+        try:
+            decoded_text = json.loads(response_content)
+        except JSONDecodeError:
+            decoded_text = response_content
+        print(decoded_text)
+
+        response_ = HttpResponse(json.dumps({'data': 'Data'}))
+        json.loads(response_.content.decode())
+
