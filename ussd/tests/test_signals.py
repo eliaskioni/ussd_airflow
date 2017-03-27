@@ -2,7 +2,6 @@ from structlog import get_logger
 
 from ussd.signals import session_started, session_ended
 from ussd.tests import UssdTestCase
-from unittest.mock import patch
 
 test_session_id_arrived = []
 
