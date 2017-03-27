@@ -15,6 +15,7 @@ from django.test import override_settings
 )
 class TestingUssdReportSession(UssdTestCase.BaseUssdTestCase, TestCase):
     customer_journey_to_use = 'sample_report_session.yml'
+    validate_ussd = False
 
     def setUp(self):
         super(TestingUssdReportSession, self).setUp()
