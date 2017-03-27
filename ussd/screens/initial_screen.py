@@ -3,6 +3,8 @@ from rest_framework import serializers
 from ussd.screens.serializers import NextUssdScreenSerializer
 import staticconf
 
+from ussd.signals import session_started
+
 
 class VariableDefinition(serializers.Serializer):
     file = serializers.CharField()
@@ -137,9 +139,11 @@ class InitialScreen(UssdHandlerAbstract):
 
             # call report session
             if self.screen_content.get('ussd_report_session'):
-                self.fire_ussd_report_session_task(self.initial_screen,
-                                                   self.ussd_request.session_id
-                                                   )
+                initial_kwargs = {
+                    "session_key": self.ussd_request.session_id}
+                session_started.send(sender=self.__class__,
+                                     **initial_kwargs
+                                     )
         else:
             next_screen = self.screen_content
         return self.ussd_request.forward(next_screen)
