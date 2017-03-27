@@ -1,0 +1,9 @@
+initial_screen:
+  type: initial_screen
+  next_screen: quit_screen
+  namespace: variable_testing
+  ussd_report_session: True
+
+quit_screen:
+  type: quit_screen
+  text: Quit Screen
